@@ -15,4 +15,25 @@ const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default { getAllUsers };
+const getUserById = async (req: Request, res: Response, next: NextFunction) => {
+  const userId = req.params.id;
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+      include: {
+        posts: true,
+      },
+    });
+    if (!user) {
+      handleResponse(res, 404, "User not found");
+      return;
+    }
+    res.status(200).json(user);
+  } catch (error: any) {
+    handleResponse(res, 500, error);
+  }
+};
+
+export default { getAllUsers, getUserById };
