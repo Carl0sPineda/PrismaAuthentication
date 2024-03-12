@@ -19,6 +19,7 @@ async function main() {
     })
   );
   app.use(express.json());
+  app.use(express.static("public"));
 
   // Health Checker
   app.get("/api/healthchecker", (req: Request, res: Response) => {
