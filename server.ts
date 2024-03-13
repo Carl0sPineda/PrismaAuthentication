@@ -19,6 +19,7 @@ async function main() {
     })
   );
   app.use(express.json());
+  app.disable("x-powered-by");
   app.use(express.static("public"));
 
   // Health Checker
