@@ -12,12 +12,7 @@ const app = express();
 async function main() {
   // Middleware
   app.use(morgan("dev"));
-  app.use(
-    cors({
-      origin: ["http://localhost:5173"],
-      credentials: true,
-    })
-  );
+  app.use(cors());
   app.use(express.json());
   app.disable("x-powered-by");
   app.use(express.static("public"));
